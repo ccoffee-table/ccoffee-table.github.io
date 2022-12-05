@@ -1,23 +1,20 @@
 // Import the required Three.js modules
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.120.1/build/three.module.js";
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.120.1/examples/jsm/loaders/GLTFLoader.js";
+import { WindowResize } from "https://cdn.jsdelivr.net/npm/three@0.120.1/examples/jsm/utils/WindowResize.js";
 
 // Set up the Three.js environment
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 
 // Set the initial size of the renderer
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-// Set up an event listener to update the size of the renderer
-// when the window is resized
-window.addEventListener( "resize", function() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-});
+// Set up the WindowResize helper to automatically handle
+// resizing the window
+const windowResize = new WindowResize( renderer, camera );
 
 // Declare the variables for the 3D models
 let face;
