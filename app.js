@@ -20,6 +20,10 @@ faceLoader.load( "models/face.glb", function( gltf ) {
   face = gltf.scene;
   scene.add( face );
   face.scale.set(0.5, 0.5, 0.5);
+
+  // Set the initial position of the camera and face
+  camera.position.z = 5;
+  face.rotation.y = 0;
 });
 
 // Load the 3D model of the left eye
@@ -37,10 +41,6 @@ rightEyeLoader.load( "models/right_eye.glb", function( gltf ) {
   scene.add( rightEye );
   rightEye.scale.set(0.5, 0.5, 0.5);
 });
-
-// Set the initial position of the camera and face
-camera.position.z = 5;
-face.rotation.y = 0;
 
 // Set up the event listener to rotate the face and eyes
 // based on mouse movement
