@@ -6,8 +6,18 @@ import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.120.1/examples/
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const renderer = new THREE.WebGLRenderer();
+
+// Set the initial size of the renderer
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
+
+// Set up an event listener to update the size of the renderer
+// when the window is resized
+window.addEventListener( "resize", function() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+});
 
 // Declare the variables for the 3D models
 let face;
@@ -20,8 +30,6 @@ faceLoader.load( "models/face.glb", function( gltf ) {
   face = gltf.scene;
   scene.add( face );
   face.scale.set(0.5, 0.5, 0.5);
-
-  // Set the initial position of the camera and face
   camera.position.z = 5;
   face.rotation.y = 0;
 
