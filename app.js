@@ -9,9 +9,13 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+// Declare the variables for the 3D models
+let face;
+let leftEye;
+let rightEye;
+
 // Load the 3D model of the face
 const faceLoader = new GLTFLoader();
-let face;
 faceLoader.load( "models/face.glb", function( gltf ) {
   face = gltf.scene;
   scene.add( face );
@@ -20,7 +24,6 @@ faceLoader.load( "models/face.glb", function( gltf ) {
 
 // Load the 3D model of the left eye
 const leftEyeLoader = new GLTFLoader();
-let leftEye;
 leftEyeLoader.load( "models/left_eye.glb", function( gltf ) {
   leftEye = gltf.scene;
   scene.add( leftEye );
@@ -29,7 +32,6 @@ leftEyeLoader.load( "models/left_eye.glb", function( gltf ) {
 
 // Load the 3D model of the right eye
 const rightEyeLoader = new GLTFLoader();
-let rightEye;
 rightEyeLoader.load( "models/right_eye.glb", function( gltf ) {
   rightEye = gltf.scene;
   scene.add( rightEye );
@@ -60,9 +62,9 @@ document.addEventListener( "mousemove", function( event ) {
   const dir = vector.sub( camera.position ).normalize();
   const distance = - camera.position.z / dir.z;
   const pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
-const target = new THREE.Vector3().addVectors( camera.position, dir );
-leftEye.lookAt( target );
-rightEye.lookAt( target );
+  const target = new THREE.Vector3().addVectors( camera.position, dir );
+  leftEye.lookAt( target );
+  rightEye.lookAt( target );
 });
 
 // Set up the animation loop to render the scene
