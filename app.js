@@ -11,7 +11,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-// Declare the variables for the 3D models
+// Declare the variables for the 3D modelss
 let face;
 let leftEye;
 let rightEye;
