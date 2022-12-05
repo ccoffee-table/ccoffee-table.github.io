@@ -11,6 +11,9 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+const light = new THREE.AmbientLight(0xffffff, 1);
+scene.add(light);
+
 // Declare the variables for the 3D modelss
 let face;
 let leftEye;
