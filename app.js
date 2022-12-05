@@ -11,6 +11,7 @@ document.body.appendChild( renderer.domElement );
 
 // Load the 3D model of the face
 const faceLoader = new GLTFLoader();
+let face;
 faceLoader.load( "models/face.glb", function( gltf ) {
   face = gltf.scene;
   scene.add( face );
@@ -19,6 +20,7 @@ faceLoader.load( "models/face.glb", function( gltf ) {
 
 // Load the 3D model of the left eye
 const leftEyeLoader = new GLTFLoader();
+let leftEye;
 leftEyeLoader.load( "models/left_eye.glb", function( gltf ) {
   leftEye = gltf.scene;
   scene.add( leftEye );
@@ -27,6 +29,7 @@ leftEyeLoader.load( "models/left_eye.glb", function( gltf ) {
 
 // Load the 3D model of the right eye
 const rightEyeLoader = new GLTFLoader();
+let rightEye;
 rightEyeLoader.load( "models/right_eye.glb", function( gltf ) {
   rightEye = gltf.scene;
   scene.add( rightEye );
@@ -50,13 +53,13 @@ document.addEventListener( "mousemove", function( event ) {
   // they are pointed in that direction
   const vector = new THREE.Vector3();
   vector.set(
-  2 * (event.clientX / window.innerWidth) - 1,
-  -2 * (event.clientY / window.innerHeight) + 1,
-  0.5 );
-vector.unproject( camera );
-const dir = vector.sub( camera.position ).normalize();
-const distance = - camera.position.z / dir.z;
-const pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
+    2 * (event.clientX / window.innerWidth) - 1,
+    -2 * (event.clientY / window.innerHeight) + 1,
+    0.5 );
+  vector.unproject( camera );
+  const dir = vector.sub( camera.position ).normalize();
+  const distance = - camera.position.z / dir.z;
+  const pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
 const target = new THREE.Vector3().addVectors( camera.position, dir );
 leftEye.lookAt( target );
 rightEye.lookAt( target );
